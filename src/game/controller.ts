@@ -11,6 +11,21 @@ export class Controller {
     }
 
     init() {
-        console.log(this.model, this.view);
+        this.model.init();
+        this.view.drawChessBackground();
+        this.view.drawCheckers(this.model.boardInfo);
+        this.view.bindToggleChecker(this.setValueOfChecker);
     }
+
+    setValueOfChecker = (result: CheckerInfo): void => {
+        result.selected = true;
+        this.model.setSelectedCheckerPosition(result);
+    }
+}
+
+interface CheckerInfo {
+    selected?: boolean,
+    row: number;
+    column: number;
+    isKing: boolean;
 }
